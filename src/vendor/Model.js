@@ -324,7 +324,7 @@ export class Model {
     async save(runValidation = true) {
         let flag = this.beforeSave();
         if (runValidation) {
-            flag = flag && this.validate();
+            flag = flag && await this.validate();
         }
         if (flag) {
             let q = {};
@@ -424,12 +424,12 @@ export class Model {
     }
 
 
-    validate() {
+    async validate() {
         this.resetError();
         rules = this.rules();
         if (rules !== undefined) {
             for (var i = rules.length - 1; i >= 0; i--) {
-                this.handleRules(rules[i]);
+                await this.handleRules(rules[i]);
             }
         }
 
@@ -464,13 +464,13 @@ export class Model {
         this.error = {};
     }
 
-    handleRules(ruleItem) {//
+    async handleRules(ruleItem) {//
         if (Array.isArray(ruleItem.field)) {
             for (var i = 0; i < ruleItem.field.length; i++) {//loop on field
-                this.setRule(ruleItem.field[i], this[ruleItem.field[i]], ruleItem)
+                await this.setRule(ruleItem.field[i], this[ruleItem.field[i]], ruleItem)
             }
         } else {
-            this.setRule(ruleItem.field, this[ruleItem.field], ruleItem);
+            await this.setRule(ruleItem.field, this[ruleItem.field], ruleItem);
         }
     }
 
@@ -491,7 +491,7 @@ export class Model {
         }
     }
 
-    setRule(att, value, ruleItem) {
+    async setRule(att, value, ruleItem) {
         let scenario = "default";
         let skip = this.skipOnEmpty;
         let when = true;
@@ -518,7 +518,7 @@ export class Model {
                     if (ruleItem.skipOnEmpty && !this._hasValue(value)) {
                         break;
                     }
-                    this.__unique(att, value);
+                    await this.__unique(att, value);
                     break;
                 case "email":
                     if (skip && !this._hasValue(value)) {
