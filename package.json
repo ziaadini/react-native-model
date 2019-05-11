@@ -1,6 +1,6 @@
 {
   "name": "react-native-model",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "model to handle validations , sqlite , multi language and etc.",
   "main": "src/index.js",
   "scripts": {

@@ -318,6 +318,9 @@ export default class ActiveQuery {
         return new Promise(function (resolve, reject) {
             root.db.transaction(function (txn) {
                 txn.executeSql(sql, root.params(), function (tx, res) {
+                    if(!res.rows.item(0)){
+                        resolve(null);
+                    }
                     if (root._model_) {
                         model.loadAll(res.rows.item(0));
                     } else {
