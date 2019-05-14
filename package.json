@@ -1,10 +1,14 @@
 {
   "name": "react-native-model",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "model to handle validations , sqlite , multi language and etc.",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ziaadini/react-native-model"
   },
   "dependencies": {
     "react-native-sqlite-2": "^2.0.1"
