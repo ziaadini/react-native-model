@@ -116,7 +116,7 @@ export class Model {
 
     static __getBaseUrl() {
 
-        return this.VERSION ? this.BASE_URL + this.VERSION : this.BASE_URL;
+        return this.VERSION ? this.BASE_URL + this.VERSION : this.BASE_URL.substring(0, this.BASE_URL.length - 1);
     }
 
     static __getUrl(url, params = {}, addBaseUrl = true) {
